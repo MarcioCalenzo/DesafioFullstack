@@ -1,9 +1,9 @@
-import { IUserUpdate } from "./../interfaces/users/index";
+import { IContactUpdate } from "../interfaces/contacts";
 import { Request, Response, NextFunction } from "express";
 import { SchemaOf } from "yup";
 
-const verifyUpdateUser =
-  (schema: SchemaOf<IUserUpdate>) =>
+const verifyUpdateContact =
+  (schema: SchemaOf<IContactUpdate>) =>
   async (req: Request, res: Response, next: NextFunction) => {
     const data = req.body;
 
@@ -11,9 +11,9 @@ const verifyUpdateUser =
       stripUnknown: true,
     });
 
-    req.userUpdate = validatedData;
+    req.contactUpdate = validatedData;
 
     next();
   };
 
-export default verifyUpdateUser;
+export default verifyUpdateContact;

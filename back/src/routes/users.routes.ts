@@ -12,12 +12,19 @@ import verifyIdUpdateAuthAdm from "../middlewares/verifyIdUpdateUser.middleware"
 import verifyUpdateAuthAdm from "../middlewares/verifyUpdateAuthAdm.middleware";
 import verifyUpdateUser from "../middlewares/verifyUpdateUser.middlewares";
 import { userUpdateSchema } from "../schemas/users.schema";
+import validateUserMiddleware from "../middlewares/validateUser.middlewares";
+import verifyUserIdOrAdmin from "../middlewares/verifyUserIdOrAdmin.middlewares";
 
 const userRoutes = Router();
 
-userRoutes.post("", userCreateController);
-userRoutes.get("", verifyAuthUser, verifyAuthAdm, userListController);
-userRoutes.delete("/:id", verifyAuthUser, verifyAuthAdm, deleteUserController);
+userRoutes.post("", validateUserMiddleware, userCreateController);
+userRoutes.get("", verifyAuthUser, userListController);
+userRoutes.delete(
+  "/:id",
+  verifyAuthUser,
+  verifyUserIdOrAdmin,
+  deleteUserController
+);
 userRoutes.patch(
   "/:id",
   verifyUpdateUser(userUpdateSchema),
@@ -25,6 +32,7 @@ userRoutes.patch(
   verifyUpdateAuthAdm,
   verifyActiveUser,
   verifyIdUpdateAuthAdm,
+  verifyUserIdOrAdmin,
   updateUserController
 );
 

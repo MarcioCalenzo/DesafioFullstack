@@ -1,16 +1,17 @@
+import { Request, Response, NextFunction } from "express";
 
-import { Request, Response, NextFunction } from "express"
+const verifyActiveUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const active = req.body.isActive;
 
-const verifyActiveUser = async (req: Request, res: Response, next: NextFunction) => {
- 
-  const active = req.body.isActive
-
-  if(active || active === false ) {
-      
-      return res.status(401).json({ message: "Bad request" })
+  if (active || active === false) {
+    return res.status(401).json({ message: "Bad request" });
   }
 
-   next()
-}
+  next();
+};
 
-export default verifyActiveUser
+export default verifyActiveUser;

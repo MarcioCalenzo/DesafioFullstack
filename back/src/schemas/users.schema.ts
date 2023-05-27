@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
 import { IUserRequest, IUser, IUserUpdate } from "../interfaces/users";
+import { contactSchema } from "./contacts.schema";
 
 const userSchema: SchemaOf<IUserRequest> = yup.object().shape({
   email: yup.string().email().required(),
@@ -24,6 +25,7 @@ const userWithoutPasswordSchema: SchemaOf<IUser> = yup.object().shape({
   phone: yup.string().notRequired(),
   isAdm: yup.boolean().notRequired(),
   isActive: yup.boolean().notRequired(),
+  contacts: yup.array().of(contactSchema).notRequired(),
   createdAt: yup.date().notRequired(),
   updatedAt: yup.date().notRequired(),
 });

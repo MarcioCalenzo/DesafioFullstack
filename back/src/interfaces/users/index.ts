@@ -1,3 +1,5 @@
+import { IContact } from "../contacts";
+
 export interface IUserRequest {
   name: string;
   email: string;
@@ -11,7 +13,9 @@ export interface IUser {
   name: string;
   email: string;
   phone: string;
+  isActive: boolean;
   isAdm: boolean;
+  contacts: IContact[];
   createdAt: Date;
   updatedAt: Date;
 }

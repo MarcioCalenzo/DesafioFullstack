@@ -13,6 +13,11 @@ declare global {
         password: string;
         phone: string;
       };
+      contactUpdate: {
+        email: string;
+        name: string;
+        phone_number: string;
+      };
     }
   }
 }

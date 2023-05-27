@@ -31,7 +31,19 @@ const createUserService = async (data: IUserRequest): Promise<IUser> => {
     stripUnknown: true,
   });
 
-  return userWithoutPassord;
+  const modifiedResponse: IUser = {
+    id: userWithoutPassord.id,
+    email: userWithoutPassord.email,
+    name: userWithoutPassord.name,
+    phone: userWithoutPassord.phone,
+    contacts: userWithoutPassord.contacts,
+    isActive: userWithoutPassord.isActive,
+    isAdm: userWithoutPassord.isAdm,
+    updatedAt: userWithoutPassord.updatedAt,
+    createdAt: userWithoutPassord.createdAt,
+  };
+
+  return modifiedResponse;
 };
 
 export default createUserService;

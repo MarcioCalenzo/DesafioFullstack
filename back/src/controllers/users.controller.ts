@@ -23,7 +23,8 @@ const userCreateController = async (req: Request, res: Response) => {
 
 const userListController = async (req: Request, res: Response) => {
   try {
-    const users = await listUserService();
+    const { isAdm, id } = req.user;
+    const users = await listUserService(isAdm, id);
 
     return res.json(users);
   } catch (error) {
