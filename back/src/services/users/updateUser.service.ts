@@ -1,30 +1,31 @@
-import AppDataSource from "../../data-source"
-import User  from "../../entities/user.entities"
-import { IUserUpdate } from "../../interfaces/users"
-import { hash } from "bcryptjs"
-import {AppError} from "../../errors/appError"
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
+import { AppError } from "../../errors/App.error";
+import { IUserUpdate } from "../../interfaces/users";
+import { hash } from "bcryptjs";
 
-const updateUSerService = async ({name, email, password}: IUserUpdate, id: string): Promise<User> => {
-    const userRepository = AppDataSource.getRepository(User)
+const updateUSerService = async (
+  { name, email, password, phone }: IUserUpdate,
+  id: string
+): Promise<User> => {
+  const userRepository = AppDataSource.getRepository(User);
 
-    const users = await userRepository.findOneBy({id})
+  const users = await userRepository.findOneBy({ id });
 
-    if (!users) {
-        throw new AppError("User not found", 404)
-    }
+  if (!users) {
+    throw new AppError("User not found", 404);
+  }
 
-    await userRepository.update(
-        id,
-        {
-            name: name ? name : users.name,
-            email: email ? email : users.email,
-            password: password ? await hash(password, 10) : users.password
-        }
-    )
+  await userRepository.update(id, {
+    name: name ? name : users.name,
+    email: email ? email : users.email,
+    phone: phone ? phone : users.phone,
+    password: password ? await hash(password, 10) : users.password,
+  });
 
-    const updatedUser = await userRepository.findOneBy({id})
+  const updatedUser = await userRepository.findOneBy({ id });
 
-    return updatedUser
-}
+  return updatedUser;
+};
 
-export default updateUSerService
+export default updateUSerService;

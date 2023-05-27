@@ -5,12 +5,13 @@ declare global {
     interface Request {
       user: {
         isAdm: boolean;
-        id: number;
+        id: string;
       };
       userUpdate: {
         email: string;
         name: string;
         password: string;
+        phone: string;
       };
     }
   }

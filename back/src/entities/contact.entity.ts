@@ -22,6 +22,9 @@ export class Contact {
   @Column({ unique: true })
   phone_number: string;
 
+  @Column({ default: true })
+  isActive: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 
