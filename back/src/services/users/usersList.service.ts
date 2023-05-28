@@ -1,22 +1,41 @@
 import { User } from "../../entities/user.entity";
 import AppDataSource from "../../data-source";
-import { userWithoutPasswordArraySchema } from "../../schemas/users.schema";
+import { userWithoutPasswordSchema } from "../../schemas/users.schema";
 import { IUser } from "../../interfaces/users";
 
 const listUserService = async (isAdmin: boolean, id: string) => {
   const userRepository = AppDataSource.getRepository(User);
 
   if (isAdmin) {
-    const users = await userRepository.find();
+    try {
+      const users = await userRepository.find();
 
-    const userWithoutPassord = await userWithoutPasswordArraySchema.validate(
-      users.map((user) => user),
-      {
-        stripUnknown: true,
-      }
-    );
+      const modifiedResponseArray: IUser[] = users.map((user) => {
+        try {
+          const validatedUser = userWithoutPasswordSchema.validateSync(user, {
+            stripUnknown: true,
+          });
 
-    return userWithoutPassord;
+          return {
+            id: validatedUser.id,
+            email: validatedUser.email,
+            name: validatedUser.name,
+            phone: validatedUser.phone,
+            contacts: validatedUser.contacts,
+            isActive: validatedUser.isActive,
+            isAdm: validatedUser.isAdm,
+            updatedAt: validatedUser.updatedAt,
+            createdAt: validatedUser.createdAt,
+          };
+        } catch (error) {
+          throw error;
+        }
+      });
+
+      return modifiedResponseArray;
+    } catch (error) {
+      throw error;
+    }
   } else {
     const user = await userRepository.findOneBy({ id });
 

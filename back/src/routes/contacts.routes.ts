@@ -12,6 +12,8 @@ import verifyIdUpdateAuthAdm from "../middlewares/verifyIdUpdateUser.middleware"
 import verifyUpdateAuthAdm from "../middlewares/verifyUpdateAuthAdm.middleware";
 import verifyUpdateContact from "../middlewares/verifyUpdateContact.middlewares";
 import { contactUpdateSchema } from "../schemas/contacts.schema";
+import verifyUserIdOrAdmin from "../middlewares/verifyUserIdOrAdmin.middlewares";
+import verifyContactUserIdOrAdmin from "../middlewares/verifyContactUserIdOrAdmin.middlewares";
 
 const contactRoutes = Router();
 
@@ -20,7 +22,7 @@ contactRoutes.get("", verifyAuthUser, contactListController);
 contactRoutes.delete(
   "/:id",
   verifyAuthUser,
-  verifyAuthAdm,
+  verifyContactUserIdOrAdmin,
   deleteContactController
 );
 contactRoutes.patch(
@@ -30,6 +32,7 @@ contactRoutes.patch(
   verifyUpdateAuthAdm,
   verifyActiveUser,
   verifyIdUpdateAuthAdm,
+  verifyUserIdOrAdmin,
   updateContactController
 );
 

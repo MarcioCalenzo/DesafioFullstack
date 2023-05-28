@@ -30,7 +30,6 @@ const createContactService = async (
   contact.name = data.name;
   contact.email = data.email;
   contact.phone_number = data.phone_number;
-  contact.user = user;
 
   const newContact = await contactRepository.save(contact);
 
