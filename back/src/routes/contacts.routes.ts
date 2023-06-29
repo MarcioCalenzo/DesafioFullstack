@@ -6,7 +6,6 @@ import {
   updateContactController,
 } from "../controllers/contacts.controller";
 import verifyActiveUser from "../middlewares/verifyActiveUser.middleware";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
 import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
 import verifyIdUpdateAuthAdm from "../middlewares/verifyIdUpdateUser.middleware";
 import verifyUpdateAuthAdm from "../middlewares/verifyUpdateAuthAdm.middleware";
