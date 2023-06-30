@@ -1,4 +1,3 @@
-import { Exclude, Expose, Type } from "class-transformer";
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -42,7 +41,10 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => Contact, (contact) => contact.user, { eager: true })
+  @OneToMany(() => Contact, (contact) => contact.user, {
+    eager: true,
+    onDelete: "CASCADE",
+  })
   contacts: Contact[];
 
   @BeforeInsert()

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   deleteUserController,
+  listUserOnlyController,
   updateUserController,
   userCreateController,
   userListController,
@@ -35,5 +36,6 @@ userRoutes.patch(
   verifyUserIdOrAdmin,
   updateUserController
 );
+userRoutes.get("/profile", verifyAuthUser, listUserOnlyController);
 
 export default userRoutes;

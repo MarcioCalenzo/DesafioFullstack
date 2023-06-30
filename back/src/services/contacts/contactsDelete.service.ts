@@ -12,7 +12,7 @@ const deleteContactService = async (id: string) => {
       throw new AppError("Bad request", 400);
     }
 
-    await contactRepository.update({ id }, { isActive: false });
+    await contactRepository.delete({ id });
 
     return null;
   } else {

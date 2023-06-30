@@ -13,7 +13,7 @@ const deleteUserService = async (id: string, res: Response) => {
       throw new AppError("Bad request", 400);
     }
 
-    await userRepository.update({ id }, { isActive: false });
+    await userRepository.delete({ id });
 
     return null;
   } else {

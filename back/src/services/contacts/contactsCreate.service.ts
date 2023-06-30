@@ -3,11 +3,13 @@ import { Contact } from "../../entities/contact.entity";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/App.error";
 import { IContactRequest, IContact } from "../../interfaces/contacts";
+import { IUser } from "../../interfaces/users";
+import { userWithoutPasswordSchema } from "../../schemas/users.schema";
 
 const createContactService = async (
   data: IContactRequest,
   id: string
-): Promise<IContact> => {
+): Promise<IUser> => {
   const contactRepository = AppDataSource.getRepository(Contact);
   const userRepository = AppDataSource.getRepository(User);
 
@@ -30,10 +32,17 @@ const createContactService = async (
   contact.name = data.name;
   contact.email = data.email;
   contact.phone_number = data.phone_number;
+  contact.user = user;
 
-  const newContact = await contactRepository.save(contact);
+  await contactRepository.save(contact);
 
-  return newContact;
+  const newUser = await userRepository.findOneBy({ id });
+
+  const userWithoutPassord = await userWithoutPasswordSchema.validate(newUser, {
+    stripUnknown: true,
+  });
+
+  return userWithoutPassord;
 };
 
 export default createContactService;

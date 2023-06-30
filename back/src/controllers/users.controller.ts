@@ -6,6 +6,7 @@ import createUserService from "../services/users/usersCreate.service";
 import listUserService from "../services/users/usersList.service";
 import deleteUserService from "../services/users/usersDelete.service";
 import updateUSerService from "../services/users/updateUser.service";
+import listOnlyUser from "../services/users/listOnlyUser.service";
 
 const userCreateController = async (req: Request, res: Response) => {
   try {
@@ -25,6 +26,18 @@ const userListController = async (req: Request, res: Response) => {
   try {
     const { isAdm, id } = req.user;
     const users = await listUserService(isAdm, id);
+
+    return res.json(users);
+  } catch (error) {
+    if (error instanceof AppError) {
+      handleError(error, req, res);
+    }
+  }
+};
+const listUserOnlyController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.user;
+    const users = await listOnlyUser(id);
 
     return res.json(users);
   } catch (error) {
@@ -69,4 +82,5 @@ export {
   userListController,
   deleteUserController,
   updateUserController,
+  listUserOnlyController,
 };

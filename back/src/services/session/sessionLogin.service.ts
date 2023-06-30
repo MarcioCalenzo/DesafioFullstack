@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppError } from "../../errors/App.error";
 import { User } from "../../entities/user.entity";
+import { userWithoutPasswordSchema } from "../../schemas/users.schema";
 
 const loginUserService = async ({ email, password }: IUserLogin) => {
   const userRepository = AppDataSource.getRepository(User);
@@ -24,7 +25,10 @@ const loginUserService = async ({ email, password }: IUserLogin) => {
     expiresIn: "24h",
     subject: String(dataUser.id),
   });
-
-  return token;
+  const user = userWithoutPasswordSchema.validateSync(dataUser, {
+    stripUnknown: true,
+  });
+  // console.log(dataUser);
+  return { token, user };
 };
 export default loginUserService;
