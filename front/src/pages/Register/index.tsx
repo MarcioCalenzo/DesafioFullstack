@@ -30,7 +30,7 @@ const schema = yup.object({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Ambas as senhas tem que ser iguais"),
-  phone: yup.string().required("phone é obrigatório"),
+  phone: yup.string().required("Telefone é obrigatório"),
   isAdm: yup.bool().default(false),
 });
 
@@ -77,7 +77,7 @@ export default function Register() {
           <label htmlFor="phone">Telefone</label>
           <input
             type="text"
-            placeholder="Fale sobre você"
+            placeholder="Digite seu telefone"
             {...register("phone")}
           />
           <span>{errors.phone?.message}</span>

@@ -29,6 +29,7 @@ export interface iUserContext {
   removeContact: (id: string) => void;
   setContactEdit: React.Dispatch<React.SetStateAction<string>>;
   editUserModalToggle: boolean;
+  contactEdit: string;
 }
 
 export interface iAxiosErr {

@@ -270,6 +270,7 @@ export default function AuthProvider({ children }: iUserProviderProps) {
         editContact,
         editUser,
         deleteUser,
+        contactEdit,
         setContactEdit,
         editUserModalToggle,
         setEditUserModalToggle,

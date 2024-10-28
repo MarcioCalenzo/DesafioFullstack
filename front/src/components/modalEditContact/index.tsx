@@ -13,7 +13,13 @@ import { iModalEditContact } from "../../interfaces";
 export default function ModalEditContact({
   setOpenModalEditContact,
 }: iModalEditContact) {
-  const { editContact } = useContext(AuthContext);
+  const { editContact, userContacts, contactEdit } = useContext(AuthContext);
+
+  const currentContact = userContacts.find(
+    (contact) => contact.id === contactEdit
+  );
+
+  console.log(currentContact);
 
   const ContactCreateSchema = yup.object({
     name: yup.string().notRequired(),
@@ -46,6 +52,7 @@ export default function ModalEditContact({
             <label>Nome</label>
             <input
               type="text"
+              value={currentContact?.name}
               {...register("name")}
               placeholder="Digite o nome"
             />
@@ -55,6 +62,7 @@ export default function ModalEditContact({
             <label>Email</label>
             <input
               type="text"
+              value={currentContact?.email}
               {...register("email")}
               placeholder="Digite o email"
             />
@@ -64,6 +72,7 @@ export default function ModalEditContact({
             <label>Telefone</label>
             <input
               type="text"
+              value={currentContact?.phone_number}
               {...register("phone_number")}
               placeholder="Digite o telefone"
             />

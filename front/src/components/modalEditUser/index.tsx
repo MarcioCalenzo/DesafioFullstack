@@ -13,7 +13,7 @@ import { iEditUserForm } from "../../interfaces/user";
 export default function ModalEditUser({
   setEditUserModalToggle,
 }: iModalEditUser) {
-  const { editUser } = useContext(AuthContext);
+  const { editUser, user } = useContext(AuthContext);
 
   const ContactCreateSchema = yup.object({
     name: yup.string().notRequired(),
@@ -47,6 +47,7 @@ export default function ModalEditUser({
             <label>Nome</label>
             <input
               type="text"
+              value={user?.name}
               {...register("name")}
               placeholder="Digite o nome"
             />
@@ -56,6 +57,7 @@ export default function ModalEditUser({
             <label>Email</label>
             <input
               type="text"
+              value={user?.email}
               {...register("email")}
               placeholder="Digite o email"
             />
@@ -65,6 +67,7 @@ export default function ModalEditUser({
             <label>Telefone</label>
             <input
               type="text"
+              value={user?.phone}
               {...register("phone")}
               placeholder="Digite o telefone"
             />
