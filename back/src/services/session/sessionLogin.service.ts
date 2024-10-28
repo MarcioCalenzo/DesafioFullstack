@@ -8,7 +8,6 @@ import { userWithoutPasswordSchema } from "../../schemas/users.schema";
 
 const loginUserService = async ({ email, password }: IUserLogin) => {
   const userRepository = AppDataSource.getRepository(User);
-
   const dataUser = await userRepository.findOneBy({ email });
 
   if (!dataUser) {
@@ -25,10 +24,11 @@ const loginUserService = async ({ email, password }: IUserLogin) => {
     expiresIn: "24h",
     subject: String(dataUser.id),
   });
+
   const user = userWithoutPasswordSchema.validateSync(dataUser, {
     stripUnknown: true,
   });
-  // console.log(dataUser);
+
   return { token, user };
 };
 export default loginUserService;

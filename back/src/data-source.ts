@@ -10,6 +10,14 @@ const AppDataSource = new DataSource(
         entities: [path.join(__dirname, "./entities/**.{js,ts}")],
         migrations: [path.join(__dirname, "./migrations/**.{js,ts}")],
       }
+    : process.env.NODE_ENV === "test"
+    ? {
+        type: "sqlite",
+        database: path.join(__dirname, "../test.sqlite"),
+        entities: [path.join(__dirname, "./entities/**.{js,ts}")],
+        synchronize: true,
+        logging: true,
+      }
     : {
         type: "postgres",
         host: process.env.PGHOST,
