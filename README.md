@@ -23,7 +23,7 @@ Observaçao : Se estiver com duvida nesta etapa nao hesite em entrar em contato 
 
 5. Após a instalação das dependências, execute o comando para iniciar a aplicação em ambas as janelas de terminal. Se estiver usando npm, execute o comando `npm run dev`. Se estiver usando o yarn, execute o comando `yarn dev`.
 
-Agora você está pronto para executar o projeto Desafio Backend Jr em seu ambiente local! Abra o navegador e acesse a URL [http://localhost:5173/](http://localhost:5173/).
+Agora você está pronto para executar o projeto em seu ambiente local! Abra o navegador e acesse a URL [http://localhost:5173/](http://localhost:5173/).
 
 # Documetaçao da API 
 
