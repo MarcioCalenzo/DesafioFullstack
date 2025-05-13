@@ -276,7 +276,7 @@ header : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbSI6ZmFsc2UsImlhdCI
 ```json
 {}
 ```
-### Não terá resposta 
+### Não terá resposta  
 
 
 Caso tenha qualquer duvida sobre a aplicaçao não hesite em me procurar 
